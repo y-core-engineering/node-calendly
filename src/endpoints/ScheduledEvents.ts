@@ -114,7 +114,7 @@ export default class ScheduledEvents extends CalendlyApiEndpoint {
     }
 }
 
-type ListEventInviteesRequestParams = {
+export type ListEventInviteesRequestParams = {
     count?: number;
     email?: string;
     page_token?: string;
@@ -122,7 +122,7 @@ type ListEventInviteesRequestParams = {
     status?: 'active' | 'canceled';
 };
 
-type ListEventsRequestParams = {
+export type ListEventsRequestParams = {
     count?: number;
     invitee_email?: string;
     max_start_time?: Date;

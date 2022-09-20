@@ -32,7 +32,7 @@ export default class DataCompliance extends CalendlyApiEndpoint {
     }
 }
 
-type DataComplianceResponse =
+export type DataComplianceResponse =
     | ErrorResponse
     | {
           emails: string[];

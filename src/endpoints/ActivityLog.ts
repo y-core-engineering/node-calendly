@@ -71,7 +71,7 @@ export type ActivityLogResponse =
           exceeds_max_total_count: boolean;
       });
 
-type ActivityLogEntry = {
+export type ActivityLogEntry = {
     occurred_at: Date;
     actor?: {
         uri: string;

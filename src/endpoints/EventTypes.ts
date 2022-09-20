@@ -150,7 +150,7 @@ export type EventTypeOrganisationRequest = EventTypeRequest & {
     organization?: string;
 };
 
-type EventTypeRequest = {
+export type EventTypeRequest = {
     active?: boolean;
     count?: number;
     page_token?: string;
