@@ -37,7 +37,7 @@ export default class Calendly implements OrganizationProvider, MeProvider {
         return user.current_organization;
     }
 
-    public static getUuidFromUri(uri: string): string {
-        return uri.split('/').pop() || '';
+    public static getUuidFromUri(uri: string): string | undefined {
+        return uri.split('/').pop();
     }
 }

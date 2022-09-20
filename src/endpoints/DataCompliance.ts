@@ -4,10 +4,10 @@
  *  File : DataCompliance.ts
  *******************************************/
 
-import CalendlyApiPart from '../CalendlyApiPart';
+import CalendlyApiEndpoint from '../CalendlyApiEndpoint';
 import { ErrorResponse } from '../types/ErrorResponse';
 
-export default class DataCompliance extends CalendlyApiPart {
+export default class DataCompliance extends CalendlyApiEndpoint {
     public async deleteInviteeData(
         emails: string[]
     ): Promise<DataComplianceResponse> {

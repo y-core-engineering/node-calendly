@@ -4,14 +4,14 @@
  *  File : ActivityLog.ts
  *******************************************/
 
-import CalendlyApiWithOrganization from '../CalendlyApiWithOrganization';
+import CalendlyApiEndpointWithOrganization from '../CalendlyApiEndpointWithOrganization';
 import {
     ActivityLogQuery,
     ActivityLogQueryParams,
     ActivityLogResponse
 } from '../types/ActivityLog';
 
-export default class ActivityLog extends CalendlyApiWithOrganization {
+export default class ActivityLog extends CalendlyApiEndpointWithOrganization {
     public async listActivityLogEntries(
         params: ActivityLogQueryParams
     ): Promise<ActivityLogResponse> {

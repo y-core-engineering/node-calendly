@@ -4,10 +4,10 @@
  *  File : ApiWithOrganization.ts
  *******************************************/
 
-import CalendlyApiPart from '../CalendlyApiPart';
+import CalendlyApiEndpoint from '../CalendlyApiEndpoint';
 import { OrganizationProvider } from '../Provider';
 
-export default class CalendlyApiWithOrganization extends CalendlyApiPart {
+export default class CalendlyApiWithOrganization extends CalendlyApiEndpoint {
     protected organizationProvider: OrganizationProvider;
 
     constructor(

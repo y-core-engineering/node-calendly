@@ -3,7 +3,7 @@
  *  Created On : Fri Sep 16 2022
  *  File : Api.ts
  *******************************************/
-export default class CalendlyApiPart {
+export default class CalendlyApiEndpoint {
     protected ACCESS_TOKEN: string;
 
     constructor(ACCESS_TOKEN: string) {

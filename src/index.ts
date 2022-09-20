@@ -11,13 +11,14 @@ config();
 
 const CALENDLY_ACCESS_TOKEN = process.env.CALENDLY_ACCESS_TOKEN || '';
 
-console.log('CALENDLY_ACCESS_TOKEN:', CALENDLY_ACCESS_TOKEN);
 const calendly: Calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
 
 calendly.getMe().then((me) => {
     const uuid = Calendly.getUuidFromUri(me);
-
-    calendly.users.getUser({ uuid }).then((user) => {
-        console.log('user:', user);
-    });
+    if (uuid) {
+        console.log('UUID:', uuid);
+        calendly.users.getUser({ uuid }).then((user) => {
+            console.log('user:', user);
+        });
+    }
 });

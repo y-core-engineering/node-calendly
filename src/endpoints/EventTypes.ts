@@ -3,7 +3,7 @@
  *  Created On : Fri Sep 16 2022
  *  File : EventTypes.ts
  *******************************************/
-import CalendlyApiWithOrganization from '../CalendlyApiWithOrganization';
+import CalendlyApiEndpointWithOrganization from '../CalendlyApiEndpointWithOrganization';
 import { MeProvider, OrganizationProvider } from '../Provider';
 import {
     default as EventType,
@@ -16,7 +16,7 @@ import {
 } from '../types/EventTypeAvailableTime';
 import { PaginationResponse } from '../types/PaginationResponse';
 
-export default class EventTypes extends CalendlyApiWithOrganization {
+export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     meProvider: MeProvider;
     constructor(
         ACCESS_TOKEN: string,

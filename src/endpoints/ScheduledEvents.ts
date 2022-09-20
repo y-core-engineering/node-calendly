@@ -4,13 +4,13 @@
  *  File : ScheduledEvents.ts
  *******************************************/
 
-import CalendlyApiPart from '../CalendlyApiPart';
+import CalendlyApiEndpoint from '../CalendlyApiEndpoint';
 import { ErrorResponse } from '../types/ErrorResponse';
 import { EventType } from '../types/Event';
 import { Invitee } from '../types/Invitee';
 import { PaginationResponse } from '../types/PaginationResponse';
 
-export default class ScheduledEvents extends CalendlyApiPart {
+export default class ScheduledEvents extends CalendlyApiEndpoint {
     public async listEvents(
         params: ListEventsRequestParams
     ): Promise<PaginationResponse<EventType>> {
