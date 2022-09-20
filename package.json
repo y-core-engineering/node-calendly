@@ -1,0 +1,27 @@
+{
+  "name": "calendly",
+  "version": "1.0.0",
+  "description": "Node module to access calendly api.",
+  "main": "./lib/Calendly.js",
+  "engines": {
+    "node": ">=17.5.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/y-core-engineering/calendly.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/y-core-engineering/calendly/issues"
+  },
+  "homepage": "https://github.com/y-core-engineering/calendly#readme",
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "typescript": "^4.8.3"
+  }
+}
