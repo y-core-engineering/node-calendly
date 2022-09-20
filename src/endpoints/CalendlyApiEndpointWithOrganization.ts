@@ -12,7 +12,7 @@ export default class CalendlyApiEndpointWithOrganization extends CalendlyApiEndp
 
     constructor(
         ACCESS_TOKEN: string,
-        organizationProvider: OrganizationProvider
+        organizationProvider: OrganizationProvider,
     ) {
         super(ACCESS_TOKEN);
         this.organizationProvider = organizationProvider;

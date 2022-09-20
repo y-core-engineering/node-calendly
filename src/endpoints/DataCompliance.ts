@@ -22,10 +22,10 @@ export default class DataCompliance extends CalendlyApiEndpoint {
      * @returns {Promise<DataComplianceResponse>} A list of processed emails.
      */
     public async deleteInviteeData(
-        emails: string[]
+        emails: string[],
     ): Promise<DataComplianceResponse> {
         const body = JSON.stringify({
-            emails
+            emails,
         });
         const url = `https://api.calendly.com/data_compliance/deletion/invitees`;
         return await this.fetchPost(url, body);

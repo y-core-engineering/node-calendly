@@ -15,8 +15,8 @@ export default class CalendlyApiEndpoint {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${this.ACCESS_TOKEN}`,
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
 
         const data = await response.json();
@@ -31,9 +31,9 @@ export default class CalendlyApiEndpoint {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${this.ACCESS_TOKEN}`
+                Authorization: `Bearer ${this.ACCESS_TOKEN}`,
             },
-            body
+            body,
         });
         const data = await response.json();
         if (data && data.message)

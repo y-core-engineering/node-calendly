@@ -34,7 +34,7 @@ export default class ScheduledEvents extends CalendlyApiEndpoint {
      * @see https://developer.calendly.com/api-docs/2d5ed9bbd2952-list-events
      */
     public async listEvents(
-        params: ListEventsRequestParams
+        params: ListEventsRequestParams,
     ): Promise<PaginationResponse<EventDefinition>> {
         const queryParams = this.getEventsQueryParams(params);
         const url = `https://api.calendly.com/scheduled_events?${queryParams}`;
@@ -51,7 +51,7 @@ export default class ScheduledEvents extends CalendlyApiEndpoint {
      */
     public async listEventInvitees(
         uuid: string,
-        params: ListEventInviteesRequestParams
+        params: ListEventInviteesRequestParams,
     ): Promise<PaginationResponse<Invitee> & ErrorResponse> {
         const queryParams = this.getEventInviteesQueryParams(params);
         const url = `https://api.calendly.com/scheduled_events/${uuid}/invitees?${queryParams}`;
@@ -68,12 +68,12 @@ export default class ScheduledEvents extends CalendlyApiEndpoint {
         }
         if (params.max_start_time) {
             queryParams.push(
-                `max_start_time=${params.max_start_time.toISOString}`
+                `max_start_time=${params.max_start_time.toISOString}`,
             );
         }
         if (params.min_start_time) {
             queryParams.push(
-                `min_start_time=${params.min_start_time.toISOString}`
+                `min_start_time=${params.min_start_time.toISOString}`,
             );
         }
         if (params.organization) {
@@ -95,7 +95,7 @@ export default class ScheduledEvents extends CalendlyApiEndpoint {
     }
 
     private getEventInviteesQueryParams(
-        params: ListEventInviteesRequestParams
+        params: ListEventInviteesRequestParams,
     ) {
         const queryParams: string[] = [];
         if (params.count) {
