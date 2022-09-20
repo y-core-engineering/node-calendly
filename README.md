@@ -56,11 +56,9 @@ calendly.users
 
 The Calendly API requires that you send a valid JSON string in the request body or request parameters. For example, the request parameters to `List Events` should be:
 
-```json
-{
-    "count": 20,
-    "sort": "asc"
-}
+```shell
+    https://api-endpoint/?count=20&sort=asc
+
 ```
 
 When using the module `calendly` you don't have to specify the full object but only the nested one as the module automatically wraps the provided data. Using the above example this translates to:
