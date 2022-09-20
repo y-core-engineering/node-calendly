@@ -4,7 +4,7 @@ Calendly API bindings for Node.js
 
 ## Installation
 
-`$ npm install --save calendly`
+`$ npm install --save node-calendly`
 
 ## API
 
