@@ -1,6 +1,6 @@
 {
     "name": "node-calendly",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Node module to access calendly api.",
     "main": "./lib/Calendly.js",
     "types": "lib/Calendly.d.ts",
@@ -16,7 +16,7 @@
         "prepare": "npm run build",
         "prepublishOnly": "npm test && npm run lint",
         "preversion": "npm run lint",
-        "version": "npm run format && git add -A src",
+        "version": "npm run format && git add -A",
         "postversion": "git push && git push --tags",
         "lint": "tslint -c tslint.json -p tsconfig.json --fix"
     },
