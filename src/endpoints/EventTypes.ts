@@ -87,9 +87,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     ): Promise<EventTypeAvailableTimeResponse> {
         const queryParams = this.getEventTypeAvailableTimeRequestParams(params);
         const url = `https://api.calendly.com/event_type_available_times?${queryParams}`;
-        console.log(url);
-        throw new Error('Has errors');
-        // return await this.fetchGet(url);
+        return await this.fetchGet(url);
     }
 
     private async listEventTypes(
