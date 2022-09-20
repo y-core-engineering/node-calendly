@@ -4,8 +4,8 @@
  *  File : DataCompliance.ts
  *******************************************/
 
-import CalendlyApiEndpoint from '../CalendlyApiEndpoint';
 import { ErrorResponse } from '../types/ErrorResponse';
+import CalendlyApiEndpoint from './CalendlyApiEndpoint';
 
 export default class DataCompliance extends CalendlyApiEndpoint {
     public async deleteInviteeData(

@@ -3,8 +3,8 @@
  *  Created On : Fri Sep 16 2022
  *  File : EventTypes.ts
  *******************************************/
-import CalendlyApiEndpoint from '../CalendlyApiEndpoint';
 import { User } from '../types/User';
+import CalendlyApiEndpoint from './CalendlyApiEndpoint';
 
 export default class Users extends CalendlyApiEndpoint {
     public async getCurrentUser(): Promise<User> {
