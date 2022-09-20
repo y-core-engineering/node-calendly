@@ -1,7 +1,6 @@
 /******************************************
  *  Author : Dr. Sebastian Herden
  *  Created On : Fri Sep 16 2022
- *  File : CalendlyGateway.ts
  *******************************************/
 
 import ActivityLog from './endpoints/ActivityLog';
@@ -11,6 +10,14 @@ import { MeProvider, OrganizationProvider } from './endpoints/Provider';
 import ScheduledEvents from './endpoints/ScheduledEvents';
 import Users from './endpoints/Users';
 
+/**
+ * The gateway to the Calendly API.
+ * @export
+ * @class Calendly
+ * @see https://developer.calendly.com/api-docs/d7755e2f9e5fe-calendly-api
+ * @implements {OrganizationProvider}
+ * @implements {MeProvider}
+ */
 export default class Calendly implements OrganizationProvider, MeProvider {
     /**
      * The access token to use for the API calls.

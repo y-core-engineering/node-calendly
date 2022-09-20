@@ -3,19 +3,21 @@
  *  Created On : Fri Sep 16 2022
  *  File : EventTypes.ts
  *******************************************/
-import {
-    default as EventType,
-    EventTypeOrganisationRequest,
-    EventTypeUserRequest
-} from '../types/EventType';
-import {
-    EventTypeAvailableTimeRequest,
-    EventTypeAvailableTimeResponse
-} from '../types/EventTypeAvailableTime';
-import { PaginationResponse } from '../types/PaginationResponse';
+
+import EventType from './types/EventType';
+import { EventTypeAvailableTime } from './types/EventTypeAvailableTime';
+
 import CalendlyApiEndpointWithOrganization from './CalendlyApiEndpointWithOrganization';
+import { PaginationResponse } from './PaginationResponse';
 import { MeProvider, OrganizationProvider } from './Provider';
 
+/**
+ * The event types endpoint.
+ * @export default
+ * @class EventTypes
+ * @extends {CalendlyApiEndpointWithOrganization}
+ * @see https://developer.calendly.com/api-docs/25a4ece03c1bc-list-user-s-event-types
+ */
 export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     meProvider: MeProvider;
     constructor(
@@ -27,6 +29,11 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
         this.meProvider = meProvider;
     }
 
+    /**
+     * Returns all Event Types associated with a specified User. If user is not specified, the current user is used.
+     * @param params
+     * @returns {Promise<PaginationResponse<EventType>>} A paginated list of Event Types.
+     */
     public async listUsersEventTypes(
         params: EventTypeUserRequest
     ): Promise<PaginationResponse<EventType>> {
@@ -36,6 +43,11 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
         return await this.listEventTypes(params);
     }
 
+    /**
+     * Returns all Event Types associated with a specified Organization. If organization is not specified, the current organization is used.
+     * @param params The request parameters.
+     * @returns {Promise<PaginationResponse<EventType>>} A paginated list of Event Types.
+     */
     public async listOrganisationEventTypes(
         params: EventTypeOrganisationRequest
     ): Promise<PaginationResponse<EventType>> {
@@ -46,6 +58,11 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
         return await this.listEventTypes(params);
     }
 
+    /**
+     * Returns information about a specified Event Type.
+     * @param param The uuid of the event type.
+     * @returns {Promise<EventType>} The event type.
+     */
     public async getEventType({ uuid }: { uuid: string }): Promise<EventType> {
         const url = `https://api.calendly.com/event_types/${uuid}`;
         const response = await this.fetchGet(url);
@@ -53,6 +70,18 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     }
 
     // TODO: has errors
+    /**
+     * Returns a list of available times for an event type within a specified date range.
+     * Date range can be no greater than 1 week (7 days).
+     *
+     * NOTE:
+     *
+     * This endpoint does not support traditional keyset pagination.
+     * @param params The request parameters.
+     * @returns {Promise<EventTypeAvailableTimeResponse>} The available times.
+     * @note This endpoint does not support traditional keyset pagination.
+     * @todo has errors
+     */
     public async listEventAvailableTimes(
         params: EventTypeAvailableTimeRequest
     ): Promise<EventTypeAvailableTimeResponse> {
@@ -112,3 +141,28 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
         return queryParams.join('&');
     }
 }
+
+export type EventTypeUserRequest = EventTypeRequest & {
+    user?: string;
+};
+
+export type EventTypeOrganisationRequest = EventTypeRequest & {
+    organization?: string;
+};
+
+type EventTypeRequest = {
+    active?: boolean;
+    count?: number;
+    page_token?: string;
+    sort?: string;
+};
+
+export type EventTypeAvailableTimeRequest = {
+    end_time?: Date;
+    start_time?: Date;
+    event_type: string;
+};
+
+export type EventTypeAvailableTimeResponse = {
+    collection: EventTypeAvailableTime[];
+};

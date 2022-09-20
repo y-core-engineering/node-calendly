@@ -3,7 +3,8 @@
  *  Created On : Fri Sep 16 2022
  *  File : EventType.ts
  *******************************************/
-type EventTypeType = {
+
+type EventTypeDefinition = {
     uri: string;
     name: string | null;
     active: boolean;
@@ -45,7 +46,16 @@ type EventTypeType = {
     deleted_at: null | Date;
 };
 
-export default class EventType implements EventTypeType {
+/**
+ * A configuration for an Event. Provides two methods:
+ * - fromJson: Creates an event type object from a json object.
+ * - getUUID: Returns the uuid of the event type.
+ * @export default
+ * @interface EventType
+ * @implements {EventTypeDefinition}
+ * @see https://developer.calendly.com/api-docs/f3185c91567db-event-type
+ */
+export default class EventType implements EventTypeDefinition {
     uri: string;
     name: string | null;
     active: boolean;
@@ -98,7 +108,7 @@ export default class EventType implements EventTypeType {
     /* tslint:disable-next-line */
     deleted_at: null | Date;
 
-    private constructor(data: EventTypeType) {
+    private constructor(data: EventTypeDefinition) {
         this.uri = data.uri;
         this.name = data.name;
         this.active = data.active;
@@ -121,26 +131,11 @@ export default class EventType implements EventTypeType {
         this.deleted_at = data.deleted_at;
     }
 
-    static fromJson(data: EventTypeType): EventType {
+    static fromJson(data: EventTypeDefinition): EventType {
         return new EventType(data);
     }
 
-    public getUUID(): string {
+    public getUuid(): string {
         return this.uri.split('/').pop() || '';
     }
 }
-
-export type EventTypeUserRequest = EventTypeRequest & {
-    user?: string;
-};
-
-export type EventTypeOrganisationRequest = EventTypeRequest & {
-    organization?: string;
-};
-
-type EventTypeRequest = {
-    active?: boolean;
-    count?: number;
-    page_token?: string;
-    sort?: string;
-};

@@ -6,6 +6,12 @@
 
 import { Cancellation } from './Cancellation';
 
+/**
+ * An individual who has been invited to meet with a Calendly member.
+ * @export
+ * @interface Invitee
+ * @see https://developer.calendly.com/api-docs/decca36cf717f-invitee
+ */
 export type Invitee = {
     uri: string;
     email: string;

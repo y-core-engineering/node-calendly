@@ -4,21 +4,51 @@
  *  File : ScheduledEvents.ts
  *******************************************/
 
-import { ErrorResponse } from '../types/ErrorResponse';
-import { EventType } from '../types/Event';
-import { Invitee } from '../types/Invitee';
-import { PaginationResponse } from '../types/PaginationResponse';
-import CalendlyApiEndpoint from './CalendlyApiEndpoint';
+import { ErrorResponse } from './ErrorResponse';
+import { EventDefinition } from './types/Event';
 
+import CalendlyApiEndpoint from './CalendlyApiEndpoint';
+import { PaginationResponse } from './PaginationResponse';
+import { Invitee } from './types/Invitee';
+
+/**
+ * The scheduled events endpoint.
+ * @export default
+ * @class ScheduledEvents
+ * @extends {CalendlyApiEndpoint}
+ * @see https://developer.calendly.com/api-docs/eb8ee72701f99-list-event-invitees
+ */
 export default class ScheduledEvents extends CalendlyApiEndpoint {
+    /**
+     * Returns a list of Events.
+     * - Pass organization parameter to return events for that organization (requires admin/owner privilege)
+     * - Pass user parameter to return events for a specific User
+     *
+     * NOTES:
+     *
+     * - If you are the admin/owner of the organization, you can use both organization and user to get a list of events for a specific user within your organization.
+     * - user can only be used alone when requesting your own personal events. This will return your events within any organization that you are currently in or were a part of in the past.
+     * @param params The request parameters.
+     * @returns {Promise<PaginationResponse<EventDefinition> & ErrorResponse>}
+     * @memberof ScheduledEvents
+     * @see https://developer.calendly.com/api-docs/2d5ed9bbd2952-list-events
+     */
     public async listEvents(
         params: ListEventsRequestParams
-    ): Promise<PaginationResponse<EventType>> {
+    ): Promise<PaginationResponse<EventDefinition>> {
         const queryParams = this.getEventsQueryParams(params);
         const url = `https://api.calendly.com/scheduled_events?${queryParams}`;
         return await this.fetchGet(url);
     }
 
+    /**
+     * Returns a list of Invitees for an event.
+     * @param uuid The event uuid.
+     * @param params The request parameters.
+     * @returns {Promise<PaginationResponse<Invitee> & ErrorResponse>}
+     * @memberof ScheduledEvents
+     * @see https://developer.calendly.com/api-docs/eb8ee72701f99-list-event-invitees
+     */
     public async listEventInvitees(
         uuid: string,
         params: ListEventInviteesRequestParams
