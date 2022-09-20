@@ -9,7 +9,7 @@
     },
     "scripts": {
         "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-        "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+        "format": "prettier --write \"src/**/*.ts\"",
         "build": "tsc",
         "dev": "ts-node-dev ./src/index.ts",
         "test": "jest --config jestconfig.json",
@@ -18,7 +18,9 @@
         "preversion": "npm run lint",
         "version": "npm run format && git add -A",
         "postversion": "git push && git push --tags",
-        "lint": "tslint -c tslint.json -p tsconfig.json --fix"
+        "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+        "npmpublish": "npm publish",
+        "patch": "npm version patch && npm run npmpublish"
     },
     "repository": {
         "type": "git",
