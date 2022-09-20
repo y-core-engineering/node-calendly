@@ -37,7 +37,7 @@ No Calendly call limits known and implemented.
 
 ## API endpoints
 
-Every endpoint is accessed via your `calendly`instance:
+Every endpoint is accessed via your `node-calendly`instance:
 
 ```js
 const calendly: Calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
@@ -61,7 +61,7 @@ The Calendly API requires that you send a valid JSON string in the request body 
 
 ```
 
-When using the module `calendly` you don't have to specify the full request path as the module automatically wraps the provided data. Using the above example this translates to:
+When using the module `node-calendly` you don't have to specify the full request path as the module automatically wraps the provided data. Using the above example this translates to:
 
 ```js
 calendly.scheduledEvents
@@ -75,7 +75,7 @@ calendly.scheduledEvents
 
 Similarly, the Calendly API returns different response body information like pagination and collection.
 
-The module `calendly` automatically unwraps the parsed object and returns:
+The module `node-calendly` automatically unwraps the parsed object and returns:
 
 ```json
 {
