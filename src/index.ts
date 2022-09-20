@@ -22,15 +22,3 @@ calendly.getMe().then((me) => {
         });
     }
 });
-
-calendly.scheduledEvents
-    .listEvents({
-        count: 20,
-        sort: 'asc'
-    })
-    .then((events) => {
-        console.log('events:', events);
-    })
-    .catch((error) => {
-        console.error('error:', error);
-    });
