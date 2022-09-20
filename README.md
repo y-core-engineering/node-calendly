@@ -27,7 +27,9 @@ A `Calendly` instance.
 
 #### Example
 
-```js
+```ts
+import Calendly from 'node-calendly';
+
 const calendly: Calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
 ```
 
@@ -39,7 +41,7 @@ No Calendly call limits known and implemented.
 
 Every endpoint is accessed via your `node-calendly`instance:
 
-```js
+```ts
 const calendly: Calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
 
 // calendly.<endpoint_name>.<method_name>
@@ -47,11 +49,22 @@ const calendly: Calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
 
 Each endpoint returns a `Promise`that resolves with the result:
 
-```js
+```ts
 calendly.users
     .getUser({ uuid: 'user-uuid' })
     .then((user) => console.log('user:', user))
     .catch((err) => console.error(err));
+```
+
+**_async/await_** can also be used:
+
+```ts
+try {
+    const user : User = await calendly.users.getUser({ uuid: 'user-uuid' });
+    console.log('user:', user))
+} catch(err){
+    console.error(err)
+};
 ```
 
 The Calendly API requires that you send a valid JSON string in the request body or request parameters. For example, the request parameters to `List Events` should be:
@@ -63,7 +76,7 @@ The Calendly API requires that you send a valid JSON string in the request body 
 
 When using the module `node-calendly` you don't have to specify the full request path as the module automatically wraps the provided data. Using the above example this translates to:
 
-```js
+```ts
 calendly.scheduledEvents
     .listEvents({
         count: 20,
@@ -108,7 +121,7 @@ When calling an endpoint that returns a collection of multiple resources, you wi
 
 [Pagination][calendly-api-pagination] in Calendly API version v2.0.0 and above can be done as shown in the following example:
 
-```js
+```ts
 (async () => {
     calendly.getOrganizationUri().then(async (uri) => {
         let nextPageToken;
