@@ -129,7 +129,7 @@ When calling an endpoint that returns a collection of multiple resources, you wi
 })().catch(console.error);
 ```
 
-Each set of results my have the `nextPageToken` and `previous_page_token` properties. These properties specify respectively the parameters needed to fetch the next and previous page of results.
+Each set of results have the `nextPageToken` and `previous_page_token` properties. These properties specify respectively the parameters needed to fetch the next and previous page of results.
 
 ## Available API endpoints and methods
 
