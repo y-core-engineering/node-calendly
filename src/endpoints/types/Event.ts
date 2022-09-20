@@ -33,14 +33,14 @@ export type EventDefinition = {
     event_memberships: [
         {
             user: string;
-        },
+        }
     ];
     event_guests: [
         {
             email: string;
             created_at: Date;
             updated_at: Date;
-        },
+        }
     ];
     cancellation?: Cancellation;
 };
@@ -87,7 +87,7 @@ export default class CalendlyEvent implements EventDefinition {
     event_memberships: [
         {
             user: string;
-        },
+        }
     ];
     /* tslint:disable-next-line */
     event_guests: [
@@ -95,7 +95,7 @@ export default class CalendlyEvent implements EventDefinition {
             email: string;
             created_at: Date;
             updated_at: Date;
-        },
+        }
     ];
     cancellation?: Cancellation;
     uuid: string | undefined;

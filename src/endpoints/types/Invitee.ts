@@ -24,7 +24,7 @@ export type Invitee = {
             question: string;
             answer: string;
             position: number;
-        },
+        }
     ];
     timezone: string;
     event: string;

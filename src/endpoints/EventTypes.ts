@@ -23,7 +23,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     constructor(
         ACCESS_TOKEN: string,
         organizationProvider: OrganizationProvider,
-        meProvider: MeProvider,
+        meProvider: MeProvider
     ) {
         super(ACCESS_TOKEN, organizationProvider);
         this.meProvider = meProvider;
@@ -35,7 +35,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
      * @returns {Promise<PaginationResponse<EventType>>} A paginated list of Event Types.
      */
     public async listUsersEventTypes(
-        params: EventTypeUserRequest,
+        params: EventTypeUserRequest
     ): Promise<PaginationResponse<EventType>> {
         if (!params.user) {
             params.user = await this.meProvider.getMe(); // request default me
@@ -49,7 +49,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
      * @returns {Promise<PaginationResponse<EventType>>} A paginated list of Event Types.
      */
     public async listOrganisationEventTypes(
-        params: EventTypeOrganisationRequest,
+        params: EventTypeOrganisationRequest
     ): Promise<PaginationResponse<EventType>> {
         if (!params.organization) {
             params.organization =
@@ -83,7 +83,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
      * @todo has errors
      */
     public async listEventAvailableTimes(
-        params: EventTypeAvailableTimeRequest,
+        params: EventTypeAvailableTimeRequest
     ): Promise<EventTypeAvailableTimeResponse> {
         const queryParams = this.getEventTypeAvailableTimeRequestParams(params);
         const url = `https://api.calendly.com/event_type_available_times?${queryParams}`;
@@ -93,7 +93,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     }
 
     private async listEventTypes(
-        params: EventTypeUserRequest & EventTypeOrganisationRequest,
+        params: EventTypeUserRequest & EventTypeOrganisationRequest
     ) {
         const queryParams = this.getListEventTypesRequestParams(params);
         const url = `https://api.calendly.com/event_types?${queryParams}`;
@@ -101,7 +101,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     }
 
     private getListEventTypesRequestParams(
-        params: EventTypeUserRequest & EventTypeOrganisationRequest,
+        params: EventTypeUserRequest & EventTypeOrganisationRequest
     ): string {
         const queryParams: string[] = [];
         if (params.organization) {
@@ -126,7 +126,7 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     }
 
     private getEventTypeAvailableTimeRequestParams(
-        params: EventTypeAvailableTimeRequest,
+        params: EventTypeAvailableTimeRequest
     ) {
         const queryParams: string[] = [];
         if (params.end_time) {

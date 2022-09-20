@@ -3,6 +3,11 @@ import ActivityLog from '../endpoints/ActivityLog';
 import DataCompliance from '../endpoints/DataCompliance';
 import EventTypes from '../endpoints/EventTypes';
 import ScheduledEvents from '../endpoints/ScheduledEvents';
+/******************************************
+ *  Author : Dr. Sebastian Herden
+ *  Created On : Tue Sep 20 2022
+ *  File : Calendly.test.ts.ts
+ *******************************************/
 import Users from '../endpoints/Users';
 
 import { config } from 'dotenv';
@@ -20,11 +25,11 @@ jest.spyOn(global, 'fetch').mockImplementation(
                 Promise.resolve({
                     resource: {
                         uri: EXPECTED_ME,
-                        current_organization: EXPECTED_ORGANIZATION,
-                    },
-                }),
-        }),
-    ) as jest.Mock,
+                        current_organization: EXPECTED_ORGANIZATION
+                    }
+                })
+        })
+    ) as jest.Mock
 );
 
 beforeEach(() => {
@@ -33,6 +38,43 @@ beforeEach(() => {
 
 test('Calendly is instantiable', () => {
     expect(new Calendly(CALENDLY_ACCESS_TOKEN)).toBeInstanceOf(Calendly);
+});
+
+test('Calendly has all endpoints', () => {
+    const calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
+    expect(calendly.activityLog).toBeInstanceOf(ActivityLog);
+    expect(calendly.dataCompliance).toBeInstanceOf(DataCompliance);
+    expect(calendly.eventTypes).toBeInstanceOf(EventTypes);
+    expect(calendly.scheduledEvents).toBeInstanceOf(ScheduledEvents);
+    expect(calendly.users).toBeInstanceOf(Users);
+});
+
+test('Calendly can get the current user', async () => {
+    const calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
+    const me = await calendly.getMe();
+    expect(me).toBe(EXPECTED_ME);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith(uri, {
+        headers: {
+            Authorization: `Bearer ${CALENDLY_ACCESS_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        method: 'GET'
+    });
+});
+
+test('Calendly can get the current organization', async () => {
+    const calendly = new Calendly(CALENDLY_ACCESS_TOKEN);
+    const organization = await calendly.getOrganizationUri();
+    expect(organization).toBe(EXPECTED_ORGANIZATION);
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith(uri, {
+        headers: {
+            Authorization: `Bearer ${CALENDLY_ACCESS_TOKEN}`,
+            'Content-Type': 'application/json'
+        },
+        method: 'GET'
+    });
 });
 
 test('Calendly transforms uris to uuids', () => {

@@ -27,11 +27,11 @@ export default class ActivityLog extends CalendlyApiEndpointWithOrganization {
      * @see ActivityLogResponse
      */
     public async listActivityLogEntries(
-        params: ActivityLogQueryParams,
+        params: ActivityLogQueryParams
     ): Promise<ActivityLogResponse> {
         const query: ActivityLogQuery = new ActivityLogQuery(
             params,
-            await this.organizationProvider.getOrganizationUri(),
+            await this.organizationProvider.getOrganizationUri()
         );
         const queryParams = query.getQueryParams();
 
@@ -54,7 +54,7 @@ export type ActivityLogQueryParams = {
     namespace?: [string];
     page_token?: string;
     search_term?: string;
-    sort?: [string];
+    sort?: string;
 };
 
 /**
@@ -116,7 +116,7 @@ export class ActivityLogQuery implements ActivityLogQueryParams {
     page_token?: string;
     /* tslint:disable-next-line */
     search_term?: string;
-    sort?: [string];
+    sort?: string;
 
     constructor(data: ActivityLogQueryParams, organization: string) {
         this.organization = organization;
@@ -145,12 +145,12 @@ export class ActivityLogQuery implements ActivityLogQueryParams {
         }
         if (this.max_occurred_at) {
             queryParams.push(
-                `max_occurred_at=${this.max_occurred_at.toISOString()}`,
+                `max_occurred_at=${this.max_occurred_at.toISOString()}`
             );
         }
         if (this.min_occurred_at) {
             queryParams.push(
-                `min_occurred_at=${this.min_occurred_at.toISOString()}`,
+                `min_occurred_at=${this.min_occurred_at.toISOString()}`
             );
         }
         if (this.namespace) {
@@ -163,7 +163,7 @@ export class ActivityLogQuery implements ActivityLogQueryParams {
             queryParams.push(`search_term=${this.search_term}`);
         }
         if (this.sort) {
-            queryParams.push(`sort=${this.sort.join(',')}`);
+            queryParams.push(`sort=${this.sort}`);
         }
         return queryParams.join('&');
     }
