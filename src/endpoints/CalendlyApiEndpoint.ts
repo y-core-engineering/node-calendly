@@ -22,7 +22,6 @@ export default class CalendlyApiEndpoint {
         const data = await response.json();
         if (data && data.message)
             throw new Error(data.title + ': ' + data.message);
-        throw new Error('Unknown error');
         return data;
     }
 
@@ -38,7 +37,6 @@ export default class CalendlyApiEndpoint {
         const data = await response.json();
         if (data && data.message)
             throw new Error(data.title + ': ' + data.message);
-        throw new Error('Unknown error');
         return data;
     }
 }
