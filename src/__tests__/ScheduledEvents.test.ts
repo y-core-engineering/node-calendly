@@ -119,7 +119,7 @@ test('should get scheduled events with start and end dates', async () => {
     const scheduledEvents = await calendly.scheduledEvents.listEvents({
         organization: 'https://api.calendly.com/organizations/123',
         max_start_time: new Date('2022-12-31T23:59:59.999Z'),
-        min_start_time: new Date('2022-12-01T00:00:00.000Z'),
+        min_start_time: new Date('2022-12-01T00:00:00.000Z')
     });
     expect(scheduledEvents).toBeDefined();
     expect(scheduledEvents).toHaveProperty('collection');
