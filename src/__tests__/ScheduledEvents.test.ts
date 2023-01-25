@@ -115,6 +115,28 @@ test('should get scheduled events with organization', async () => {
     );
 });
 
+test('should get scheduled events with start and end dates', async () => {
+    const scheduledEvents = await calendly.scheduledEvents.listEvents({
+        organization: 'https://api.calendly.com/organizations/123',
+        max_start_time: new Date('2022-12-31T23:59:59.999Z'),
+        min_start_time: new Date('2022-12-01T00:00:00.000Z'),
+    });
+    expect(scheduledEvents).toBeDefined();
+    expect(scheduledEvents).toHaveProperty('collection');
+    expect(scheduledEvents).toHaveProperty('pagination');
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith(
+        'https://api.calendly.com/scheduled_events?max_start_time=2022-12-31T23:59:59.999Z&min_start_time=2022-12-01T00:00:00.000Z&organization=https://api.calendly.com/organizations/123',
+        {
+            headers: {
+                Authorization: `Bearer ${CALENDLY_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json'
+            },
+            method: 'GET'
+        }
+    );
+});
+
 test('List event invitees', async () => {
     const scheduledEvents = await calendly.scheduledEvents.listEventInvitees(
         'GBGBDCAADAEDCRZ2',

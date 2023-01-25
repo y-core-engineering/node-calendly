@@ -68,12 +68,12 @@ export default class ScheduledEvents extends CalendlyApiEndpoint {
         }
         if (params.max_start_time) {
             queryParams.push(
-                `max_start_time=${params.max_start_time.toISOString}`
+                `max_start_time=${params.max_start_time.toISOString()}`
             );
         }
         if (params.min_start_time) {
             queryParams.push(
-                `min_start_time=${params.min_start_time.toISOString}`
+                `min_start_time=${params.min_start_time.toISOString()}`
             );
         }
         if (params.organization) {
