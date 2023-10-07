@@ -42,6 +42,7 @@
     "devDependencies": {
         "@types/jest": "^29.0.3",
         "@types/node": "^18.7.18",
+        "@types/stopcock": "^1.1.1",
         "dotenv": "^16.0.2",
         "jest": "^29.0.3",
         "prettier": "^2.7.1",
@@ -53,5 +54,8 @@
     },
     "files": [
         "lib/**/*"
-    ]
+    ],
+    "dependencies": {
+        "stopcock": "^1.1.0"
+    }
 }

@@ -14,7 +14,13 @@ export default class CalendlyApiEndpointWithOrganization extends CalendlyApiEndp
         ACCESS_TOKEN: string,
         organizationProvider: OrganizationProvider
     ) {
-        super(ACCESS_TOKEN);
+        super(ACCESS_TOKEN, {
+            timeout: 60000,
+            limit: 8,
+            interval: 1000,
+            bucketSize: 35
+        });
+
         this.organizationProvider = organizationProvider;
     }
 }

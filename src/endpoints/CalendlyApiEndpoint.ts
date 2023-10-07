@@ -3,11 +3,29 @@
  *  Created On : Fri Sep 16 2022
  *  File : Api.ts
  *******************************************/
+import stopcock from 'stopcock';
+
+export type Options = {
+    timeout?: number;
+    limit?: number;
+    interval?: number;
+    bucketSize?: number;
+};
+
 export default class CalendlyApiEndpoint {
     protected ACCESS_TOKEN: string;
+    private options: Options;
 
-    constructor(ACCESS_TOKEN: string) {
+    constructor(ACCESS_TOKEN: string, params?: Options) {
+        this.options = {
+            timeout: params?.timeout || 60000,
+            limit: params?.limit || 10,
+            interval: params?.interval || 1000,
+            bucketSize: params?.bucketSize || 35
+        };
         this.ACCESS_TOKEN = ACCESS_TOKEN;
+        this.fetchGet = stopcock(this.fetchGet, this.options);
+        this.fetchPost = stopcock(this.fetchPost, this.options);
     }
 
     protected async fetchGet(url: string) {
