@@ -4,7 +4,7 @@
  *  File : ApiWithOrganization.ts
  *******************************************/
 
-import CalendlyApiEndpoint from './CalendlyApiEndpoint';
+import CalendlyApiEndpoint, { Options } from './CalendlyApiEndpoint';
 import { OrganizationProvider } from './Provider';
 
 export default class CalendlyApiEndpointWithOrganization extends CalendlyApiEndpoint {
@@ -12,15 +12,10 @@ export default class CalendlyApiEndpointWithOrganization extends CalendlyApiEndp
 
     constructor(
         ACCESS_TOKEN: string,
-        organizationProvider: OrganizationProvider
+        organizationProvider: OrganizationProvider,
+        params?: Options
     ) {
-        super(ACCESS_TOKEN, {
-            timeout: 60000,
-            limit: 2,
-            interval: 1000,
-            bucketSize: 35
-        });
-
+        super(ACCESS_TOKEN, params);
         this.organizationProvider = organizationProvider;
     }
 }

@@ -4,6 +4,7 @@
  *******************************************/
 
 import ActivityLog from './endpoints/ActivityLog';
+import { Options } from './endpoints/CalendlyApiEndpoint';
 import DataCompliance from './endpoints/DataCompliance';
 import EventTypes from './endpoints/EventTypes';
 import { MeProvider, OrganizationProvider } from './endpoints/Provider';
@@ -70,13 +71,13 @@ export default class Calendly implements OrganizationProvider, MeProvider {
      * @param ACCESS_TOKEN The access token to use for the API calls.
      * @memberof Calendly
      */
-    constructor(ACCESS_TOKEN: string) {
+    constructor(ACCESS_TOKEN: string, params?: Options) {
         this.ACCESS_TOKEN = ACCESS_TOKEN;
-        this.users = new Users(this.ACCESS_TOKEN);
-        this.activityLog = new ActivityLog(this.ACCESS_TOKEN, this);
-        this.dataCompliance = new DataCompliance(this.ACCESS_TOKEN);
-        this.eventTypes = new EventTypes(this.ACCESS_TOKEN, this, this);
-        this.scheduledEvents = new ScheduledEvents(this.ACCESS_TOKEN);
+        this.users = new Users(this.ACCESS_TOKEN, params);
+        this.activityLog = new ActivityLog(this.ACCESS_TOKEN, this, params);
+        this.dataCompliance = new DataCompliance(this.ACCESS_TOKEN, params);
+        this.eventTypes = new EventTypes(this.ACCESS_TOKEN, this, this, params);
+        this.scheduledEvents = new ScheduledEvents(this.ACCESS_TOKEN, params);
     }
 
     /**

@@ -4,12 +4,12 @@
  *  File : EventTypes.ts
  *******************************************/
 
-import EventType from './types/EventType';
-import { EventTypeAvailableTime } from './types/EventTypeAvailableTime';
-
+import { Options } from './CalendlyApiEndpoint';
 import CalendlyApiEndpointWithOrganization from './CalendlyApiEndpointWithOrganization';
 import { PaginationResponse } from './PaginationResponse';
 import { MeProvider, OrganizationProvider } from './Provider';
+import EventType from './types/EventType';
+import { EventTypeAvailableTime } from './types/EventTypeAvailableTime';
 
 /**
  * The event types endpoint.
@@ -23,9 +23,10 @@ export default class EventTypes extends CalendlyApiEndpointWithOrganization {
     constructor(
         ACCESS_TOKEN: string,
         organizationProvider: OrganizationProvider,
-        meProvider: MeProvider
+        meProvider: MeProvider,
+        params?: Options
     ) {
-        super(ACCESS_TOKEN, organizationProvider);
+        super(ACCESS_TOKEN, organizationProvider, params);
         this.meProvider = meProvider;
     }
 
