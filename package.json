@@ -1,6 +1,6 @@
 {
     "name": "node-calendly",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Node module to access calendly api.",
     "main": "./lib/Calendly.js",
     "types": "lib/Calendly.d.ts",
