@@ -4,12 +4,22 @@
  *  File : Api.ts
  *******************************************/
 import stopcock from 'stopcock';
+import { DEBUG_LEVEL, LogHandler } from '../Logger';
+
+const logger = LogHandler.newInstance();
+const LOG_NAMESPACE = 'API CALL';
 
 export type Options = {
     timeout?: number;
     limit?: number;
     interval?: number;
     bucketSize?: number;
+};
+
+export type RequestOptions = {
+    method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+    headers?: any;
+    body?: any;
 };
 
 export default class CalendlyApiEndpoint {
@@ -24,27 +34,46 @@ export default class CalendlyApiEndpoint {
             bucketSize: params?.bucketSize || 35
         };
         this.ACCESS_TOKEN = ACCESS_TOKEN;
-        this.fetchGet = stopcock(this.fetchGet, this.options);
-        this.fetchPost = stopcock(this.fetchPost, this.options);
+        // this.fetchGet = stopcock(this.fetchGet, this.options);
+        // this.fetchPost = stopcock(this.fetchPost, this.options);
+        this.request = stopcock(this.request, this.options);
     }
 
     protected async fetchGet(url: string) {
-        const response = await fetch(url, {
+        // const response = await fetch(url, {
+        //     method: 'GET',
+        //     headers: {
+        //         Authorization: `Bearer ${this.ACCESS_TOKEN}`,
+        //         'Content-Type': 'application/json'
+        //     }
+        // });
+        // const data = await response.json();
+        // if (data && data.message)
+        //     throw new Error(data.title + ': ' + data.message);
+        // return data;
+        return this.request(url, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${this.ACCESS_TOKEN}`,
                 'Content-Type': 'application/json'
             }
         });
-
-        const data = await response.json();
-        if (data && data.message)
-            throw new Error(data.title + ': ' + data.message);
-        return data;
     }
 
     protected async fetchPost(url: string, body: string) {
-        const response = await fetch(url, {
+        // const response = await fetch(url, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         Authorization: `Bearer ${this.ACCESS_TOKEN}`
+        //     },
+        //     body
+        // });
+        // const data = await response.json();
+        // if (data && data.message)
+        //     throw new Error(data.title + ': ' + data.message);
+        // return data;
+        return this.request(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,9 +81,52 @@ export default class CalendlyApiEndpoint {
             },
             body
         });
-        const data = await response.json();
-        if (data && data.message)
-            throw new Error(data.title + ': ' + data.message);
-        return data;
+    }
+
+    protected async request(
+        uri: string,
+        options: RequestOptions
+    ): Promise<any> {
+        return new Promise((resolve, reject) => {
+            fetch(uri, options)
+                .then((response) => {
+                    // console.log(response.headers);
+                    if (response.status === 429) {
+                        reject('Too many requests');
+                    } else if (!response.ok) {
+                        logger.error(
+                            `Error fetching data. Response status ${response.status}`,
+                            LOG_NAMESPACE,
+                            'request'
+                        );
+                        console.error(
+                            uri,
+                            response.status,
+                            response.statusText
+                        );
+                        if (DEBUG_LEVEL === 'debug') console.error(options);
+                    }
+                    if (response.status === 202) {
+                        return null;
+                    }
+                    return response.json().catch((error) => {
+                        logger.error(
+                            `Error parsing response: ${error}`,
+                            LOG_NAMESPACE,
+                            'request'
+                        );
+                        return null;
+                    });
+                })
+                .then((data) => {
+                    if (data === null) {
+                        resolve(null);
+                    }
+                    resolve(data);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
     }
 }
