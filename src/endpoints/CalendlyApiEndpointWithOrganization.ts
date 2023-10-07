@@ -16,7 +16,7 @@ export default class CalendlyApiEndpointWithOrganization extends CalendlyApiEndp
     ) {
         super(ACCESS_TOKEN, {
             timeout: 60000,
-            limit: 8,
+            limit: 2,
             interval: 1000,
             bucketSize: 35
         });

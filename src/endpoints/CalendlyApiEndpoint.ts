@@ -29,7 +29,7 @@ export default class CalendlyApiEndpoint {
     constructor(ACCESS_TOKEN: string, params?: Options) {
         this.options = {
             timeout: params?.timeout || 60000,
-            limit: params?.limit || 10,
+            limit: params?.limit || 2,
             interval: params?.interval || 1000,
             bucketSize: params?.bucketSize || 35
         };
@@ -40,17 +40,6 @@ export default class CalendlyApiEndpoint {
     }
 
     protected async fetchGet(url: string) {
-        // const response = await fetch(url, {
-        //     method: 'GET',
-        //     headers: {
-        //         Authorization: `Bearer ${this.ACCESS_TOKEN}`,
-        //         'Content-Type': 'application/json'
-        //     }
-        // });
-        // const data = await response.json();
-        // if (data && data.message)
-        //     throw new Error(data.title + ': ' + data.message);
-        // return data;
         return this.request(url, {
             method: 'GET',
             headers: {
@@ -61,18 +50,6 @@ export default class CalendlyApiEndpoint {
     }
 
     protected async fetchPost(url: string, body: string) {
-        // const response = await fetch(url, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: `Bearer ${this.ACCESS_TOKEN}`
-        //     },
-        //     body
-        // });
-        // const data = await response.json();
-        // if (data && data.message)
-        //     throw new Error(data.title + ': ' + data.message);
-        // return data;
         return this.request(url, {
             method: 'POST',
             headers: {
@@ -109,6 +86,7 @@ export default class CalendlyApiEndpoint {
                     if (response.status === 202) {
                         return null;
                     }
+
                     return response.json().catch((error) => {
                         logger.error(
                             `Error parsing response: ${error}`,

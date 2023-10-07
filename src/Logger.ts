@@ -10,7 +10,7 @@ dotenv.config();
 
 export const DEBUG_LEVEL: string = process.env.DEBUG_LEVEL
     ? process.env.DEBUG_LEVEL
-    : 'debug';
+    : 'info';
 
 export class LogHandler {
     private logger: winston.Logger;
